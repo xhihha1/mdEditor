@@ -1,0 +1,91 @@
+
+
+<html>
+<head>
+<!--<link rel="stylesheet" href="simplemde.min.css">
+<script src="simplemde.min.js"></script>-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+/*#MyID{
+width:500px;
+height:400px;
+border:1px solid #F00;
+}*/
+.myDiv{
+width:500px;
+height:400px;
+border:1px solid #F00;
+}
+.CodeMirror {
+	height: 300px;
+}
+</style>
+</head>
+
+<body>
+<div class="myDiv">
+<textarea id="MyID">
+
+</textarea>
+</div>
+<!--<div class="myDiv">
+<textarea id="demo3">
+</textarea>
+</div>-->
+<button onclick="removeMDE()">click</button>
+<button onclick="getMDE()">getMDE</button>
+<button onclick="setMDE()">setMDE</button>
+<button onclick="togglePreview()">togglePreview</button>
+<div id="A"></div>
+<div id="B"></div>
+
+</body>
+
+<script type="text/javascript">
+var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+/*var simplemdeDemo = new SimpleMDE({
+		element: document.getElementById("demo3"),
+		status: false,
+		toolbar: false,
+	});
+simplemdeDemo.togglePreview();*/
+//simplemdeDemo.markdown( );
+
+simplemde.codemirror.on("change", function(){
+	console.log(simplemde.value());
+	document.getElementById('B').innerHTML =
+      marked(simplemde.value());
+	/*if(simplemdeDemo.isPreviewActive()){
+		simplemdeDemo.togglePreview();
+	}
+	simplemdeDemo.value(simplemde.value());
+	if(!simplemdeDemo.isPreviewActive()){
+		simplemdeDemo.togglePreview();
+	}*/
+});
+
+function removeMDE (){
+simplemde.toTextArea();
+simplemde = null;
+console.log("??");
+}
+function getMDE (){
+var A = simplemde.value();
+document.getElementById("A").innerHTML = A;
+}
+function setMDE (){
+var A = simplemde.value("This text will appear in the editor");
+}
+function togglePreview (){
+simplemde.togglePreview();
+}
+
+
+
+	
+</script>
+
+</html>
+
